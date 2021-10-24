@@ -7,9 +7,12 @@ public class Bingo {
     public static void main(String[] args) {
         int WholeNumber;
         //int WholeNumber1;
+
+        int UserNumber; //вводимое пользователем
+        int attempt = 0; // Счетчик попыток.
+        final int MAX_ATTEMPT = 10; // Допустимое количество попыток.
+
         Random random = new Random();
-        int UserNumber;
-        int attempt = 0;
 
 
         Scanner input = new Scanner(System.in);
@@ -24,20 +27,42 @@ public class Bingo {
 
 
         // System.out.println("WholeNumber : " + WholeNumber + " WholeNumber1 : " + WholeNumber1 ); //вывод
-        do {
+
+
+        //attempt < MAX_ATTEMPT
+        while (attempt < MAX_ATTEMPT) {
             attempt++;
+            System.out.println("Попытка " + attempt + ":");
             System.out.print("Введите Ваше целое число: (от 0 до 100)");
             UserNumber = input.nextInt();
-            if (UserNumber > WholeNumber)
+
+            if (UserNumber == 123) {
+                break;
+
+            }
+            if (UserNumber > WholeNumber) {
                 System.out.println("Вы ввели число больше");
-            else if (UserNumber < WholeNumber)
+                continue;
+            }
+            if (UserNumber < WholeNumber) {
                 System.out.println("Вы ввели число меньше ");
+                continue;
+            }
 
-            else System.out.println("Вы угадали!");
+            if (UserNumber != WholeNumber) {
+                continue;
+            }
 
+            System.out.println("Поздравляем, Вы угадали с " + attempt + " попытки!");
+            break;
         }
-        while (UserNumber != WholeNumber);
-        System.out.println("Поздравляем, Вы угадали с " + attempt + " попытки!");
+
+        System.out.println("Конец игры!");
+
+
+
+
+
 
 
     }
