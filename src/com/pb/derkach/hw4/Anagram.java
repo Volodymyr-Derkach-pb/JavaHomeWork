@@ -8,11 +8,11 @@ public class Anagram {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        System.out.print("Enter first string: ");
+        System.out.print("введите значение 1 : ");
         String first = in.nextLine().toUpperCase();
 
 
-        System.out.print("Enter second string: ");
+        System.out.print("введите значение 2  : ");
         String second = in.nextLine().toUpperCase();
 
         String result = isAnagram(first, second);
