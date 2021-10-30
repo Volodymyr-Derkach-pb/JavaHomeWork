@@ -1,53 +1,49 @@
 package com.pb.derkach.hw4;
 
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Anagram {
-    private static Scanner sc;
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter first string: ");
+        String first = in.nextLine().toUpperCase();
 
 
+        System.out.print("Enter second string: ");
+        String second = in.nextLine().toUpperCase();
 
-        Scanner sc = new Scanner(System.in);
-        String s1, s2;
-        s1 = sc.nextLine();
-        s2 = sc.nextLine();
-        //строка преобразовывается в символы
-        char[] chArr1 = s1.toUpperCase().toCharArray();
-        char[] chArr2 = s2.toUpperCase().toCharArray();
-        //сортировка
-        for(int i = chArr1.length - 1 ; i > 0 ; i--)
-        {
-            for(int j = 0 ; j < i ; j++)
-            {
-                if( chArr1[j] > chArr1[j + 1] )
-                {
-                    char tmp = chArr1[j];
-                    chArr1[j] = chArr1[j + 1];
-                    chArr1[j + 1] = tmp;
-                }
+        String result = isAnagram(first, second);
+        System.out.println(result);
+    }
+
+    public static String isAnagram(String first, String second) {
+
+        // get rid of allowed characters and convert to upper case
+        String st = first.replaceAll("[., ]","").toUpperCase();
+        String nd = second.replaceAll("[., ]","").toUpperCase();
+
+        // Now get rid of all alpha characters and compare to the empty string.
+        // Only if both are equal are the strings potential anagrams.
+        // Otherwise, the illegal characters would be present.
+        if (st.replaceAll("[A-Z]","").equals("") &&
+                nd.replaceAll("[A-Z]","").equals("")) {
+
+            // this is your original code
+            char[] arraySt = st.toCharArray();
+            char[] arrayNd = nd.toCharArray();
+            Arrays.sort(arraySt);
+            Arrays.sort(arrayNd);
+
+            // don't set a value just return it's an
+            // anagram
+            if (Arrays.equals(arraySt, arrayNd)) {
+                return "Anagram.";
             }
         }
-        for(int i = chArr2.length - 1 ; i > 0 ; i--){
-            for(int j = 0 ; j < i ; j++){
-                if( chArr2[j] > chArr2[j + 1] ){
-                    char tmp = chArr2[j];
-                    chArr2[j] = chArr2[j + 1];
-                    chArr2[j + 1] = tmp;
-                }
-            }
-            //возвращаем отсортированный массив в строку
-            String valueOfchar1 = String.valueOf(chArr1);
-            String valueOfchar2 = String.valueOf(chArr2);
-            valueOfchar1 = valueOfchar1.replaceAll(" ", "");
-            valueOfchar2 = valueOfchar2.replaceAll(" ", "");
-            System.out.println(valueOfchar1);
-            System.out.println(valueOfchar2);
-            //сравниваем строки и выводим на печать: true/false
-            System.out.println(valueOfchar1.equalsIgnoreCase(valueOfchar2));
-
-        }
-
+        // Otherwise, it's not
+        return "No Anagram.";
     }
 }
