@@ -49,10 +49,10 @@ public class Book {
     }
 
     public String getInfo() {
-        return "{" +
-                "name='" + nameofbook + '\'' +
-                ", author='" + autor + '\'' +
-                ", year='" + year + '\'' +
-                '}';
+        return "[" +
+                "название : " + nameofbook +
+                ", автор книги : " + autor +
+                ", год издания : " + year +
+                ']';
     }
 }

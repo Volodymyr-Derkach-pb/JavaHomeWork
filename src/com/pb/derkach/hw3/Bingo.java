@@ -22,7 +22,7 @@ public class Bingo {
 
         WholeNumber = random.nextInt(101); // вариант1
 
-        // WholeNumber = (int)Math.floor(Math.random() * 100); // вариант2
+        // WholeNumber = (int)Math.floor(Math.random() * 100); // вариант2 *101
 
 
 
