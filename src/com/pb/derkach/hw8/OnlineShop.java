@@ -14,44 +14,60 @@ import java.util.Scanner;
 
 public class OnlineShop {
     public static void main(String[] args) {
-        new Auth();
 
-        String loginsignUp;
-        String passwordsignUp;
-        String confirmPasswordsignUp;
 
-        String loginsignIn;
-        String passwordsignIn;
+        Scanner sign = new Scanner(System.in);
+        Auth auth = new Auth();
+        String login;
+        String password;
+        String confirmPassword;
 
-        Scanner signUp = new Scanner(System.in);
-        System.out.println("--------РЕГИСТРАЦИЯ-----");
-        System.out.println("Придумайте логин");
-        loginsignUp = signUp.nextLine();
+        boolean signedUp = false;
+        boolean signedIn = false;
 
-        System.out.println("Придумайте пароль");
-        passwordsignUp = signUp.nextLine();
+        System.out.println("-РЕГИСТРАЦИЯ-");
+        System.out.println("Придумайте логин и пароль");
+        System.out.println("Введите логин");
+        login = sign.next();
+        System.out.println("Введите пароль");
+        password = sign.next();
         System.out.println("Повторите пароль");
-        confirmPasswordsignUp = signUp.nextLine();
+        confirmPassword = sign.next();
 
-//        try {
-//
-//
-//        } catch () {
-//
-//        }
+        while (!signedUp) {
+            try {
+                auth.signUp(login, password, confirmPassword);
+                signedUp = true;
+            } catch (WrongLoginException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Для регистрации введите логин");
+                login = sign.next();
+            } catch (WrongPasswordException e) {
+                System.out.println("Введите пароль");
+                password = sign.next();
+                System.out.println("Повторите пароль");
+                confirmPassword = sign.next();
+            }
+        }
+
+        System.out.println("Вы зарегистрированы");
+
+        while (!signedIn) {
+            System.out.println("Для входа на сайт введите логин");
+            login = sign.next();
+            System.out.println("Введите пароль");
+            password = sign.next();
+            try {
+                auth.signIn(login, password);
+                signedIn = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        System.out.println("Авторизация успешна");
 
 
-        Scanner signIn = new Scanner(System.in);
-
-        System.out.println("-----Аторизация--------");
-        System.out.println("Веедите логин");
-        loginsignIn = signIn.nextLine();
-
-        System.out.println("Ведите пароль");
-        passwordsignIn = signIn.nextLine();
 
     }
-
-
-
 }

@@ -1,7 +1,7 @@
 package com.pb.derkach.hw8;
 
-//import javax.swing.*;
-//import java.awt.event.ActionEvent;
+
+
 
 /**
  *
@@ -21,61 +21,48 @@ package com.pb.derkach.hw8;
  * 		Проверяет что login и password соответствуют значениям из полей класса.
  * 		Если нет - выбрасывает исключение WrongLoginException.
  *
+ *
+ *
  * */
 
 public class Auth {
 
+
     private String login;
     private String password;
-    private String confirmPassword;
 
-//    public Auth (String login, String password, String confirmPassword) {
-//        this.login = login;
-//        this.password = password;
-//        this.confirmPassword = confirmPassword;
-//    }
-
-    public Auth() {
-
+    public void signUp(String login, String password, String confirmPassword) throws WrongPasswordException, WrongLoginException {
+        checkLogin(login);
+        checkPassword(password, confirmPassword);
+        this.login = login;
+        this.password = password;
     }
 
-    //Регистрация
-    private boolean signUp(String login, String password, String confirmPassword, String regex)
-            throws WrongLoginException, WrongPasswordException {
-        if (!login.matches(regex)) {
-            throw new WrongLoginException("Неверный логин");
-        } else if (!password.matches(regex) ||
-                !confirmPassword.matches(regex) ||
-                !password.equals(confirmPassword)) {
-            throw new WrongPasswordException("Неверный пароль");
+    public void signIn(String login, String password) throws WrongLoginException {
+        if (!this.login.equals(login) || !this.password.equals(password)) {
+            throw new WrongLoginException("Не верный логин или пароль");
         }
-        return true;
     }
 
-
-    //Авторизация
-    private boolean signIn (String login, String password, String confirmPassword, String regex)
-            throws WrongLoginException, WrongPasswordException {
-        if (!login.matches(regex)) {
-            throw new WrongLoginException("Неверный логин");
-        } else if (!password.matches(regex) ||
-                !confirmPassword.matches(regex) ||
-                !password.equals(confirmPassword)) {
-            throw new WrongPasswordException("Неверный пароль");
+    private void checkLogin(String login) throws WrongLoginException {
+        if (login.length() < 5) {
+            throw new WrongLoginException("Логин должен содержать больше 5 символов");
+        } else if (login.length() > 20) {
+            throw new WrongLoginException("Логин должен содержать меньше 20 символов");
+        } else if (!login.matches("[a-zA-Z0-9]*")) {
+            throw new WrongLoginException("Логин может содержать только латинские буквы и цифры");
         }
-        return true;
     }
 
-    //проверка
-//    public void checkСonditions() {
-//        try {
-//           // signIn(login.getText(), password.getText(), confirmPassword.getText(), "[\\w]{5,20}");
-//
-//        } catch (WrongLoginException | WrongPasswordException e) {
-//
-//        }
-//    }
-
+    private void checkPassword(String password, String confirmPassword) throws WrongPasswordException {
+        if(password.length() < 5) {
+            throw new WrongPasswordException("Пароль должен содержать более 5 символов");
+        } else if (!password.matches("[_a-zA-Z0-9]*")) {
+            throw new WrongPasswordException("Пароль может содержать только латинские буквы, цифры и подчеркивание");
+        } else if (!password.equals(confirmPassword)) {
+            throw new WrongPasswordException("Пароль не совпадает");
+        }
+    }
 
 
 }
