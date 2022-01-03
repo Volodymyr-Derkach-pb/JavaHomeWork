@@ -99,11 +99,11 @@ public class Reader {
      */
 
     public void takeBook (String... books){
-        System.out.println('\"' + this.fio + " взял книги: " );
+        System.out.println(this.fio + " взял книги: " );
         for (String book : books) {
             System.out.println(book);
         }
-        System.out.println('\"'+ ".");
+        System.out.println();
     }
 
     /**
